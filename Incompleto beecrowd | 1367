@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_PROBLEMS 26
+
+typedef struct {
+    int penalty;
+    int solved;
+} Problem;
+
+int main() {
+    int N;
+    
+    while(1){
+        scanf("%d", &N);
+        if (N == 0)
+            break;
+    
+        Problem problems[MAX_PROBLEMS];
+        for (int i = 0; i < MAX_PROBLEMS; i++) {
+            problems[i].penalty = 0;
+            problems[i].solved = 0;
+        }
+    
+        int totalTime = 0;
+        int totalSolved = 0;
+        char R[10], QT, Q = "A";
+        int TempPenalty, temp;
+    
+        for (int i = 0; i < N; i++) {
+           scanf("%c %d %s", &QT, &temp, &R);
+           if(Q != QT){
+               Q = QT;
+           }
+           if (strcmp(R,"incorrect") == 0){
+               TempPenalty+= 20;
+           }
+           else{
+               problems[Q-17].solved = temp;
+               problems[Q-17].penalty = TempPenalty;
+               totalSolved += 1;
+               TempPenalty = 0;
+           }
+           
+        }
+        for (int i = 0; i<totalSolved;i++){
+            totalTime += problems[i].penalty+problems[i].solved;
+        }
+        if(totalTime == 0 && totalSolved != 0){
+            totalTime = 1;
+        }
+    
+        printf("%d %d\n", totalSolved, totalTime);
+    }
+
+    return 0;
+}
