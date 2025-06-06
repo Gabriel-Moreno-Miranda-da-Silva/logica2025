@@ -24,30 +24,27 @@ int main() {
     
         int totalTime = 0;
         int totalSolved = 0;
-        char R[10], QT, Q = "A";
-        int TempPenalty, temp;
+        char R[10], Q;
+        int temp = 0;
     
         for (int i = 0; i < N; i++) {
-           scanf("%c %d %s", &QT, &temp, &R);
-           if(Q != QT){
-               Q = QT;
-           }
+           scanf(" %c %d %s", &Q, &temp, &R);
            if (strcmp(R,"incorrect") == 0){
-               TempPenalty+= 20;
+                if (problems[Q-'A'].solved == 0){
+                    problems[Q-'A'].penalty += 20;                    
+                }     
            }
            else{
-               problems[Q-17].solved = temp;
-               problems[Q-17].penalty = TempPenalty;
-               totalSolved += 1;
-               TempPenalty = 0;
+               problems[Q-'A'].solved += temp;
+               ++totalSolved;
            }
            
         }
-        for (int i = 0; i<totalSolved;i++){
-            totalTime += problems[i].penalty+problems[i].solved;
-        }
-        if(totalTime == 0 && totalSolved != 0){
-            totalTime = 1;
+        for (int i = 0; i<MAX_PROBLEMS;i++){
+            if (problems[i].solved){
+                totalTime += problems[i].penalty+problems[i].solved;
+            }
+            
         }
     
         printf("%d %d\n", totalSolved, totalTime);
