@@ -1,0 +1,40 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+ 
+float calcularimposto (float r, int i){
+    float V=0;
+    float imposto[2][4]={
+        {0,0.08,0.18,0.28},
+        {2000,1000,1500,9999999}
+    };
+    if (i == 0) {
+        if (r <= 2000) return 0.0;
+        else return calcularimposto(r - imposto[1][0], i + 1);
+    }
+    if (r>imposto[1][i]){
+        V += imposto[1][i] * imposto[0][i];
+        V += calcularimposto (r-imposto[1][i],i + 1);
+    }
+    else {
+        return (r) * imposto[0][i];
+    }
+    return V ;
+}
+ 
+int main() {
+    float renda;
+    float pagar = 0;
+    
+    cin >> renda;
+    pagar = calcularimposto(renda,0);
+    if (pagar <= 0){
+        cout << "Isento" << '\n';
+    }
+    else {
+        cout << "R$ " << fixed << setprecision(2) << pagar << '\n'; 
+    }
+    
+    return 0;
+}
