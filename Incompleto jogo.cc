@@ -1,6 +1,6 @@
 // a fazer:
-// arrumar int verificar para pular espaços em branco
-// fazer 0 na matriz se tornar espaços, no inicio de int main
+// arrumar int verificar para pular espaC'os em branco
+// fazer 0 na matriz se tornar espaC'os, no inicio de int main
 // output pra saber se a matriz foi completa
 // boa sorte
 
@@ -71,27 +71,27 @@ int LCN (char M[9][9]) {
 
 		if (valido == 0) {
 			cout << "Jogada invalida! tente novamente." << '\n';
+			return 0;
 		} else {
-			cout << "Jogada valida! faça uma nova jogada." << '\n';
+			cout << "Jogada valida! faC'a uma nova jogada." << '\n';
+			return 1;
 		}
 		cout << '\n';
 	}
+	return 0;
 }
 
 int main(int argc, char *argv[]) {
 	char M[9][9];
 	int i, j;
 	int valido;
-	int a, b, c;
+	char a, b, c;
 	ifstream inputFile("input2.txt");
 
 	if (inputFile.is_open()) { // Always check if the file opened successfully
 		for (i = 0; i < 9; i++) {
 			for (j = 0; j < 9; j++) {
-				if (!(arquivoEntrada >> M[i][j])) {
-                    cout << "Erro ao ler o elemento na posição [" << i << "][" << j << "]";
-                    return 1;
-                }
+				inputFile >> M[i][j];
 			}
 		}
 		inputFile.close();
@@ -99,13 +99,7 @@ int main(int argc, char *argv[]) {
 		cout << "Error opening file!";
 		return 1;
 	}
-
-	for (i = 0; i < 9; i++) {
-		for (j = 0; j < 9; j++) {
-			cin >> M[i][j];
-		}
-	}
-	while (int acabar != 1) {
+	for (int acabar = 0; acabar != 1 ; acabar++) {
 
 		cout << " |SUDOKU-|-------|-------|" << '\n';
 		for (int u = 0; u < 3; u++) {
@@ -135,9 +129,7 @@ int main(int argc, char *argv[]) {
 		cin >> b;
 		cout << "] [";
 		cin >> c;
-		cout << "]" << '\n'
-        
-        valido = LCN (a,b,c);
+		cout << "]" << '\n';
 
 	}
 
