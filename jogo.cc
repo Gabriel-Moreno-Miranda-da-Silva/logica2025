@@ -140,7 +140,7 @@ int main() {
 		} else {
 		    temp[a-1][b-1] = M[a-1][b-1];
 		}
-		if (zeros = 0) {
+		if (zeros == 0) {
 			acabar = 1;
 		}
 
