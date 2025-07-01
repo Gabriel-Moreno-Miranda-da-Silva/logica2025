@@ -1,10 +1,3 @@
-// a fazer:
-// arrumar int verificar para pular espaC'os em branco
-// fazer 0 na matriz se tornar espaC'os, no inicio de int main
-// output pra saber se a matriz foi completa
-// boa sorte
-
-
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -17,7 +10,7 @@ int Verificar(char vet[]) {
 	for (i1 = 0; i1 < 9; i1++) {
 		temp = vet[i1];
 		for (i2 = 0; i2 < 9; i2++) {
-			if (i1 != i2 && temp == vet[i2]) {
+			if (i1 != i2 && temp == vet[i2] && vet[i1] != '0') {
 				return 1;
 			}
 		}
@@ -30,68 +23,68 @@ int LCN (char M[9][9]) {
 	int i, j, n, temp;
 	int valido;
 
-	cin >> n;
-	for (int N = 0; N < n; N++) { //ler a matriz
-		valido = 1;
+	valido = 1;
 
-		//Verificar Todas as linhas
-		for (i = 0; i < 9; i++) {
-			for (j = 0; j < 9; j++) {
-				m[j] = M[i][j];
-			}
-			if (Verificar(m)) {
-				valido = 0;
-			}
-		}
-
-		//Verificar Todas as Colunas
+	//Verificar Todas as linhas
+	for (i = 0; i < 9; i++) {
 		for (j = 0; j < 9; j++) {
-			for (i = 0; i < 9; i++) {
-				m[i] = M[i][j];
+			m[j] = M[i][j];
+		}
+		if (Verificar(m)) {
+			valido = 0;
+		}
+	}
+
+	//Verificar Todas as Colunas
+	for (j = 0; j < 9; j++) {
+		for (i = 0; i < 9; i++) {
+			m[i] = M[i][j];
+		}
+		if (Verificar(m)) {
+			valido = 0;
+		}
+	}
+
+	//Verificar Todas as Matrizes 3x3
+	for (int lin = 0; lin < 9; lin += 3) {
+		for (int col = 0; col < 9; col += 3) {
+			int k = 0;
+			for (i = lin; i < lin + 3; i++) {
+				for (j = col; j < col + 3; j++,k++) {
+					m[k] = M[i][j];
+				}
 			}
 			if (Verificar(m)) {
 				valido = 0;
 			}
 		}
-
-		//Verificar Todas as Matrizes 3x3
-		for (int lin = 0; lin < 9; lin += 3) {
-			for (int col = 0; col < 9; col += 3) {
-				int k = 0;
-				for (i = lin; i < lin + 3; i++) {
-					for (j = col; j < col + 3; j++,k++) {
-						m[k] = M[i][j];
-					}
-				}
-				if (Verificar(m)) {
-					valido = 0;
-				}
-			}
-		}
-
-		if (valido == 0) {
-			cout << "Jogada invalida! tente novamente." << '\n';
-			return 0;
-		} else {
-			cout << "Jogada valida! faC'a uma nova jogada." << '\n';
-			return 1;
-		}
-		cout << '\n';
 	}
+	if (valido == 0) {
+		cout << "Jogada invalida! tente novamente." << '\n';
+		return 0;
+	} else {
+		cout << "Jogada valida! faca uma nova jogada." << '\n';
+		return 1;
+	}
+	cout << '\n';
+
 	return 0;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
 	char M[9][9];
+	char temp[9][9];
 	int i, j;
-	int valido;
-	char a, b, c;
+	int valido, zeros;
+	int a, b;
+	char c;
 	ifstream inputFile("input2.txt");
 
-	if (inputFile.is_open()) { // Always check if the file opened successfully
+	if (inputFile.is_open()) {
 		for (i = 0; i < 9; i++) {
 			for (j = 0; j < 9; j++) {
 				inputFile >> M[i][j];
+				temp[i][j] = M[i][j];
 			}
 		}
 		inputFile.close();
@@ -99,7 +92,18 @@ int main(int argc, char *argv[]) {
 		cout << "Error opening file!";
 		return 1;
 	}
-	for (int acabar = 0; acabar != 1 ; acabar++) {
+
+	int acabar = 0;
+	while (acabar != 1) {
+	    zeros = 0;
+		for (i = 0; i < 9; i++) {
+			for (j = 0; j < 9; j++) {
+				if(M[i][j]=='0') {
+					zeros++;
+				}
+			}
+		}
+
 
 		cout << " |SUDOKU-|-------|-------|" << '\n';
 		for (int u = 0; u < 3; u++) {
@@ -107,7 +111,12 @@ int main(int argc, char *argv[]) {
 				cout << " |";
 				for (j = 0; j < 3; j++) {
 					for (int k = 0; k < 3; k++) {
-						cout << " " << M[i][k+j*3];
+						if (M[i+u*3][k+j*3] == '0') {
+							cout << "  " ;
+						}
+						else {
+							cout << " " << M[i+u*3][k+j*3];
+						}
 					}
 					cout << " |";
 				}
@@ -123,15 +132,18 @@ int main(int argc, char *argv[]) {
 			}
 			cout << '\n';
 		}
-		cout << "Digite a sua Jogada (linha coluna numero): [";
-		cin >> a;
-		cout << "] [";
-		cin >> b;
-		cout << "] [";
-		cin >> c;
-		cout << "]" << '\n';
+		cout << "Digite a sua Jogada (linha coluna numero): ";
+		cin >> a >> b >> c;
+		temp[a-1][b-1] = c;
+		if(LCN(temp)==1) {
+			M[a-1][b-1] = c;
+		}
+		if (zeros = 0) {
+			acabar = 1;
+		}
 
 	}
+	cout << "Parabens, voce conseguiu resolver o SUDOKU!";
 
 	return 0;
 }
