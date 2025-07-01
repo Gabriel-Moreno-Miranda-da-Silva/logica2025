@@ -137,6 +137,8 @@ int main() {
 		temp[a-1][b-1] = c;
 		if(LCN(temp)==1) {
 			M[a-1][b-1] = c;
+		} else {
+		    temp[a-1][b-1] = M[a-1][b-1];
 		}
 		if (zeros = 0) {
 			acabar = 1;
