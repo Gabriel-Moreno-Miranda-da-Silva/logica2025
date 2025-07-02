@@ -104,7 +104,7 @@ int main() {
 				for (j = 0; j < 3; j++) {
 					for (int k = 0; k < 3; k++) {
 						if (M[i+u*3][k+j*3] == '0') {
-							cout << "  " ;
+							cout << " _" ;
 						}
 						else {
 							cout << " " << M[i+u*3][k+j*3];
