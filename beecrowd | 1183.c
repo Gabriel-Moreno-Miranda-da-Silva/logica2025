@@ -18,14 +18,16 @@ int main() {
     }
     if(strcmp(O,"S")==0){
         for(j=0;j<=10;j++){
-            for(i=j+1;i<=11;i++)
+            for(i=j+1;i<=11;i++){
                 R += M[i][j];
+            }
         }
     }
     if(strcmp(O,"M")==0){
         for(j=0;j<=10;j++){
-            for(i=j+1;i<=11;i++)
+            for(i=j+1;i<=11;i++) {
                 R += M[i][j];
+            }
         }
         R = R/66;
     }
