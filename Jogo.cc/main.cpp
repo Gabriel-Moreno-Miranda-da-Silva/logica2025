@@ -96,14 +96,6 @@ int main() {
 	int acabar = 0;
 	while (acabar != 1) {
 	    zeros = 0;
-		for (i = 0; i < 9; i++) {
-			for (j = 0; j < 9; j++) {
-				if(M[i][j]=='0') {
-					zeros++;
-				}
-			}
-		}
-
 
 		cout << " |SUDOKU-|-------|-------|" << '\n';
 		for (int u = 0; u < 3; u++) {
@@ -139,6 +131,13 @@ int main() {
 			M[a-1][b-1] = c;
 		} else {
 		    temp[a-1][b-1] = M[a-1][b-1];
+		}
+		for (i = 0; i < 9; i++) {
+			for (j = 0; j < 9; j++) {
+				if(M[i][j]=='0') {
+					zeros++;
+				}
+			}
 		}
 		if (zeros == 0) {
 			acabar = 1;
