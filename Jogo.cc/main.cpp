@@ -97,6 +97,7 @@ int main() {
 	while (acabar != 1) {
 	    zeros = 0;
 
+		// imprime a tabela de sudoku
 		cout << " |SUDOKU-|-------|-------|" << '\n';
 		for (int u = 0; u < 3; u++) {
 			for (i = 0; i < 3; i++) {
@@ -132,6 +133,7 @@ int main() {
 		} else {
 		    temp[a-1][b-1] = M[a-1][b-1];
 		}
+		//verifica que ainda não esta completado
 		for (i = 0; i < 9; i++) {
 			for (j = 0; j < 9; j++) {
 				if(M[i][j]=='0') {
