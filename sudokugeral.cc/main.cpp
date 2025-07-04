@@ -4,6 +4,7 @@
 #include <cstring>
 using namespace std;
 
+//Função que verifica se o conjunto não possui numeros repetidos
 int Verificar(string vet[]) {
 	int i1, i2;
 	string temp;
