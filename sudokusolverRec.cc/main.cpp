@@ -3,7 +3,7 @@
 #include <fstream>
 using namespace std;
 
-
+//Função que verifica se o conjunto não possui numeros repetidos
 int Verificar(int vet[9]) {
 	int i1, i2;
 	int temp;
@@ -68,7 +68,7 @@ int LCN (int M[9][9]) {
 
 	return 0;
 }
-
+//Função que preenche os espaços vazios (numero "0")
 int SUB (int temp[9][9], int i, int j, int r) {
 	temp[i][j] = r;
 	if(LCN(temp)==0) {
@@ -97,6 +97,7 @@ int main() {
 		cout << "Error opening file!";
 		return 1;
 	}
+	//imprimi quais a células modificadas e qual valor elas receberam
 	cout << "Mudancas:" << '\n';
 	for (i = 0; i < 9; i++) {
 		for (j = 0; j < 9; j++) {
