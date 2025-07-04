@@ -103,6 +103,7 @@ int main() {
 		cout << "Error opening file!";
 		return 1;
 	}
+	//imprimi quais a células modificadas e qual valor elas receberam
 	cout << "Mudancas:" << '\n';
 	for (i = 0; i < 9; i++) {
 		for (j = 0; j < 9; j++) {
@@ -115,8 +116,6 @@ int main() {
 	cout << "SUDOKU final:" << '\n';
 	for (i = 0; i < 9; i++) {
 		for (j = 0; j < 9; j++) {
-			inputFile >> M[i][j];
-			temp[i][j] = M[i][j];
 			cout << M[i][j] << " ";
 		}
 		cout << '\n';
